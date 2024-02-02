@@ -21,13 +21,14 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, unique = true, nullable = false)
     private UUID id;
     @Column(name = "login", unique = true, nullable = false)
     private String login;
     @Column(name = "password", nullable = false)
     private String password;
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private UserRole role;
     @Override
