@@ -1,8 +1,6 @@
 package com.devnews4.demo.domain.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,9 +21,14 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, unique = true, nullable = false)
     private UUID id;
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "role", nullable = false)
     private UserRole role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
