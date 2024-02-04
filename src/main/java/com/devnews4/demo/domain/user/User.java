@@ -1,6 +1,7 @@
 package com.devnews4.demo.domain.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, unique = true, nullable = false)
     private UUID id;
+    @NotBlank
     @Column(name = "login", unique = true, nullable = false)
     private String login;
     @Column(name = "password", nullable = false)
