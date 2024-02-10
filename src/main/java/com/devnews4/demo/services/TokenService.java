@@ -3,6 +3,7 @@ package com.devnews4.demo.services;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.devnews4.demo.domain.user.User;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -25,6 +26,19 @@ public class TokenService {
             return token;
         }catch(JWTCreationException exception){
             throw new RuntimeException("Error while generating Token", exception);
+        }
+    }
+
+    public String validateToken(String token){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                    .withIssuer("auth-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        }catch(JWTVerificationException exception){
+            return "";
         }
     }
     private Instant genExpirationDate(){
