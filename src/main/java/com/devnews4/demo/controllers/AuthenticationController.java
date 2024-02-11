@@ -1,10 +1,8 @@
 package com.devnews4.demo.controllers;
 
-import com.devnews4.demo.domain.user.AuthenticationDTO;
-import com.devnews4.demo.domain.user.RegisterDTO;
-import com.devnews4.demo.domain.user.User;
-import com.devnews4.demo.domain.user.UserRole;
+import com.devnews4.demo.domain.user.*;
 import com.devnews4.demo.repositories.UserRepository;
+import com.devnews4.demo.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +21,18 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+        System.out.println(usernamePassword);
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        return ResponseEntity.ok().build();
+
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
 
     }
     @PostMapping("/register")
