@@ -32,7 +32,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasRole("USER")
                         .anyRequest().authenticated() //Qualquer requisicao Http precisa estar autenticado
                         // O usuario além de possuir a Role, deve tambem conter o token valido para qualquer requisicao
-                ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+
+                )
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     @Bean

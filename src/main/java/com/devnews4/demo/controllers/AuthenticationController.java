@@ -54,4 +54,10 @@ public class AuthenticationController {
     public List<User> users(){
         return this.userRepository.findAll();
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity logout(){
+        //TODO Implementar a revogação/blacklist do Token JWT
+        System.out.println("DESLOGADO COM SUCESSO !");
+        return ResponseEntity.ok().build(); }
 }
