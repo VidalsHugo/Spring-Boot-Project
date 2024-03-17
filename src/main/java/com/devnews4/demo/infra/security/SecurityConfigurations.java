@@ -29,6 +29,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/technology").permitAll()
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasRole("USER")
                         .anyRequest().authenticated() //Qualquer requisicao Http precisa estar autenticado
                         // O usuario além de possuir a Role, deve tambem conter o token valido para qualquer requisicao
