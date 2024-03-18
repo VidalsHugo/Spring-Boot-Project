@@ -27,9 +27,21 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        //Autenticação
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        //Menu
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/menu-principal").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/technology").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/technology").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/arts").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/business").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/politics").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/science").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/sports").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/travel").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/world").permitAll()
+                        //Test
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasRole("USER")
                         .anyRequest().authenticated() //Qualquer requisicao Http precisa estar autenticado
                         // O usuario além de possuir a Role, deve tambem conter o token valido para qualquer requisicao
