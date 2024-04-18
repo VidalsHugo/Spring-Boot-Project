@@ -6,4 +6,5 @@ Java 17/21 <br>
 Spring boot <br>
 Spring Security <br>
 Token JWT <br>
-PostgreeSQL
+PostgreeSQL <br>
+NYT API
