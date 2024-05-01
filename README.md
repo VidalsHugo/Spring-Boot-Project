@@ -7,4 +7,5 @@ Spring boot <br>
 Spring Security <br>
 Token JWT <br>
 PostgreeSQL <br>
-NYT API
+NYT API <br>
+Swagger

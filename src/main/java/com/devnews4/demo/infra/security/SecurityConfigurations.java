@@ -41,6 +41,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/sports").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/travel").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api-nyt/top-stories/world").permitAll()
+                        //Swagger
+                        .requestMatchers(HttpMethod.GET, "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         //Test
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasRole("USER")
                         .anyRequest().authenticated() //Qualquer requisicao Http precisa estar autenticado
